@@ -23,6 +23,7 @@ WORKDIR /
 # Copy binary from builder stage
 COPY --from=builder /glimpse-api /glimpse-api
 COPY --from=builder /app/configs /configs
+COPY --from=builder /app/migrations /migrations
 
 # Expose port
 EXPOSE 8080
