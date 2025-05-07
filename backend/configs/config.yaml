@@ -1,0 +1,22 @@
+server:
+  port: 8080
+  timeout: 30s
+
+database:
+  host: localhost
+  port: 5432
+  user: postgres
+  password: postgres
+  dbname: glimpse
+  sslmode: disable
+  max_connections: 20
+
+auth:
+  jwt_secret: your_jwt_secret_key_here
+  token_expiry: 24h
+
+storage:
+  type: local # or s3
+  local_path: ./uploads
+  # s3_bucket: glimpse-uploads
+  # s3_region: us-east-1

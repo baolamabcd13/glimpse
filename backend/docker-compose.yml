@@ -1,0 +1,41 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: glimpse-api
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=glimpse
+    networks:
+      - glimpse-network
+    volumes:
+      - ./configs:/configs
+
+  postgres:
+    image: postgres:14-alpine
+    container_name: glimpse-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=glimpse
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - glimpse-network
+
+networks:
+  glimpse-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
